@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body {
+                margin: 0;
+                min-height: 100vh;
+                background-color: #59CDE9;  /* fallback for old browsers */
+                background-image: -webkit-linear-gradient(to bottom, #0A2A88, #59CDE9);  /* Chrome 10-25, Safari 5.1-6 */
+                background-image: linear-gradient(to bottom, #0A2A88, #59CDE9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-position: center center;
+                background-size: cover;
+                display:flex; 
+                align-items:center; 
+                justify-content:center; 
+                font-family:sans-serif;
+            }
+            div {
+                background: Whitesmoke;
+                border: 1px solid lightskyblue;
+                border-radius: 16px;
+                padding: 2.5rem;
+                width: 90%;
+                max-width: 400px;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <h2 style="color:#19B3D1; text-align:center; margin:0 0 0.5rem 0;">DigiLight</h2>
+            <p style="color:#117D92; text-align:center; font-size:0.85rem; margin:0 0 1.5rem 0;">Connect display to your network
+            </p>
+            <form method="POST" action="/save">
+                <label style="color:#117D92; font-size:0.82rem;">SSID</label>
+                <input type="text" name="ssid" placeholder="Enter WiFi name"
+                    style="width:100%; padding:0.65rem; margin:0.4rem 0 1rem 0; background:whitesmoke; border:1px solid lightskyblue; border-radius:7px; color:#117D92; font-size:0.9rem; outline:none; box-sizing:border-box;">
+                <label style="color:#117D92; font-size:0.82rem;">Password</label>
+                <input type="password" name="pass" placeholder="Enter WiFi password"
+                    style="width:100%; padding:0.65rem; margin:0.4rem 0 1.5rem 0; background:whitesmoke; border:1px solid lightskyblue; border-radius:7px; color:#117D92; font-size:0.9rem; outline:none; box-sizing:border-box;">
+                <input type="submit" value="Connect"
+                    style="width:100%; padding:0.75rem; background:#6DD8EE; color:#117D92; border:none; border-radius:7px; font-size:0.9rem; font-weight:600; cursor:pointer;">
+            </form>
+        </div>
+    </body>
+</html>

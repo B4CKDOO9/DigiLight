@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <style>
+            body {
+                margin: 0;
+                min-height: 100vh;
+                background-color: #59CDE9;  /* fallback for old browsers */
+                background-image: -webkit-linear-gradient(to bottom, #0A2A88, #59CDE9);  /* Chrome 10-25, Safari 5.1-6 */
+                background-image: linear-gradient(to bottom, #0A2A88, #59CDE9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-position: center center;
+                background-size: cover;
+                display:flex; 
+                align-items:center; 
+                justify-content:center; 
+                font-family:sans-serif;
+            }
+            .container {
+                display: flex;
+                align-items: center;
+                background: Whitesmoke;
+                padding: 3rem;
+                border-radius: 5px;
+                margin: 5rem auto;
+                width: 50%;
+                box-shadow: 0px 32px 40px -19px rgba(0,0,0,0.25);
+            }
+            .control-group {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 1.25rem;
+            }
+            .slider-row {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+            }
+            .slider {
+                appearance: none;
+                width: 100%;
+                height: 8px;
+                outline: none;
+                border-radius: 5px;
+                background: linear-gradient(to right, #1868e3 50%, #d3d3d3 50%);
+
+            }
+            .slider::-webkit-slider-thumb {
+                appearance: none;
+                width: 20px;
+                height: 20px;
+                background: #1868e3;
+                cursor: pointer;
+                border-radius: 50%;
+            }
+            .slider::-moz-range-thumb {
+                appearance: none;
+                width: 20px;
+                height: 20px;
+                background: #1868e3;
+                cursor: pointer;
+                border-radius: 50%;
+            }
+            .value {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 20px;
+                margin-left: 1rem;
+                background: #1868e3;
+                color: #ffffff;
+                width: 80px;
+                height: 40px;
+                border-radius: 5px;
+            }
+
+                        /* Toggle switch styles (from Uiverse snippet) */
+                        .toggle-container {
+                            --active-color: #1868e3;
+                            --inactive-color: #d3d3d6;
+                            position: relative;
+                            aspect-ratio: 292 / 142;
+                            height: 3.25rem; /* a bit larger to match your slider */
+                            width: 60%;
+                            max-width: 320px;
+                        }
+
+                        .toggle-input {
+                            appearance: none;
+                            margin: 0;
+                            position: absolute;
+                            z-index: 1;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            cursor: pointer;
+                        }
+
+                        .toggle {
+                            width: 100%;
+                            height: 100%;
+                            overflow: visible;
+                            display: block;
+                        }
+
+                        .toggle-background {
+                            fill: var(--inactive-color);
+                            transition: fill .4s;
+                        }
+
+                        .toggle-input:checked + .toggle .toggle-background {
+                            fill: var(--active-color);
+                        }
+
+                        .toggle-circle-center {
+                            transform-origin: center;
+                            transition: transform .6s;
+                        }
+
+                        .toggle-input:checked + .toggle .toggle-circle-center {
+                            transform: translateX(150px);
+                        }
+
+                        .toggle-circle {
+                            transform-origin: center;
+                            transition: transform .45s;
+                            backface-visibility: hidden;
+                        }
+
+                        .toggle-circle.left { transform: scale(1); }
+                        .toggle-input:checked + .toggle .toggle-circle.left { transform: scale(0); }
+                        .toggle-circle.right { transform: scale(0); }
+                        .toggle-input:checked + .toggle .toggle-circle.right { transform: scale(1); }
+
+                        .toggle-icon { transition: fill .4s; }
+                        .toggle-icon.on { fill: var(--inactive-color); }
+                        .toggle-input:checked + .toggle .toggle-icon.on { fill: #fff; }
+                        .toggle-icon.off { fill: #eaeaec; }
+                        .toggle-input:checked + .toggle .toggle-icon.off { fill: var(--active-color); }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="control-group">
+                <div class="toggle-container">
+                    <input type="checkbox" class="toggle-input" aria-label="toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 292 142" class="toggle">
+                        <path
+                            d="M71 142C31.7878 142 0 110.212 0 71C0 31.7878 31.7878 0 71 0C110.212 0 119 30 146 30C173 30 182 0 221 0C260 0 292 31.7878 292 71C292 110.212 260.212 142 221 142C181.788 142 173 112 146 112C119 112 110.212 142 71 142Z"
+                            class="toggle-background"></path>
+                        <rect rx="6" height="64" width="12" y="39" x="64" class="toggle-icon on"></rect>
+                        <path
+                            d="M221 91C232.046 91 241 82.0457 241 71C241 59.9543 232.046 51 221 51C209.954 51 201 59.9543 201 71C201 82.0457 209.954 91 221 91ZM221 103C238.673 103 253 88.6731 253 71C253 53.3269 238.673 39 221 39C203.327 39 189 53.3269 189 71C189 88.6731 203.327 103 221 103Z"
+                            fill-rule="evenodd" class="toggle-icon off"></path>
+                        <g filter="url('#goo')">
+                            <rect fill="#fff" rx="29" height="58" width="116" y="42" x="13" class="toggle-circle-center"></rect>
+                            <rect fill="#fff" rx="58" height="114" width="114" y="14" x="14" class="toggle-circle left"></rect>
+                            <rect fill="#fff" rx="58" height="114" width="114" y="14" x="164" class="toggle-circle right"></rect>
+                        </g>
+                        <filter id="goo">
+                            <feGaussianBlur stdDeviation="10" result="blur" in="SourceGraphic"></feGaussianBlur>
+                            <feColorMatrix result="goo" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" mode="matrix" in="blur">
+                            </feColorMatrix>
+                        </filter>
+                    </svg>
+                </div>
+
+                <div class="slider-row">
+                    <input type="range" class="slider" id="range" min="0" max="100" value="50">
+                    <div class="value">50%</div>
+                </div>
+            </div>
+        </div>
+        <script>
+            let slider = document.getElementById("range");
+            let value = document.querySelector(".value");
+
+            function calcValue() {
+                let valuePercentage = (slider.value / slider.max) * 100;
+                slider.style.background = `linear-gradient(to right, #1868e3 ${valuePercentage}%, #d3d3d3 ${valuePercentage}%)`;
+                value.innerHTML = `${slider.value}%`;
+            }
+            calcValue();
+            slider.addEventListener("input", calcValue);
+        </script>
+    </body>
+</html>
