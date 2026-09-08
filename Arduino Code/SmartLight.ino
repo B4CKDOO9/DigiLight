@@ -16,20 +16,6 @@ TFT_eSprite sprite = TFT_eSprite(&tft);
 int lastState = HIGH;
 int currentState;
 
-
-static void panelBlankAndBacklightOff()
-{
-  pinMode(TFT_BL, OUTPUT);
-  digitalWrite(TFT_BL, LOW); // OFF
-  // Clear panel (portrait coords in driver)
-  lcd_fill(0, 0, 180, 640, 0x0000);
-}
-
-static void backlightOn()
-{
-  digitalWrite(TFT_BL, HIGH);
-}
-
 static void lightOn()
 {
   backlightOn();
