@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            window.addEventListener("DOMContentLoaded", () => {
+                const slider = document.getElementById("range");
+                const value = document.querySelector(".value");
+                const toggle = document.getElementById("switch");
+                let lightStateValue = "0";
+
+                function calcValue() {
+                    if (!slider) return;
+
+                    let valuePercentage = (slider.value / slider.max) * 100;
+                    slider.style.background = `linear-gradient(to right, #1868e3 ${valuePercentage}%, #d3d3d3 ${valuePercentage}%)`;
+                    value.innerHTML = `${slider.value}%`;
+                }
+
+                calcValue();
+
+                if (slider) {
+                    slider.addEventListener("input", calcValue);
+                }
+
+                if (toggle) {
+                    toggle.addEventListener("change", () => {
+                        if (toggle.checked) {
+                            lightStateValue = "1";
+                            sendData();
+                        } else {
+                            lightStateValue = "0";
+                            sendData();
+                        }
+                    });
+                }
+
+                if (slider) {
+                    slider.addEventListener("input", () => {
+                        sendData();
+                    });
+                }
+
+                const sendData = async () => {
+                    if (!slider || !toggle) return;
+
+                    const response = await fetch("http://172.20.10.2/", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            lightState: lightStateValue,
+                            brightness: slider.value
+                        })
+                    });
+
+                    return response;
+                };
+            });
+        </script>
+    </body>
+</html>

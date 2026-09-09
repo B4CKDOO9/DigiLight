@@ -150,7 +150,7 @@
         <div class="container">
             <div class="control-group">
                 <div class="toggle-container">
-                    <input type="checkbox" class="toggle-input" aria-label="toggle">
+                    <input type="checkbox" class="toggle-input" aria-label="toggle" id="switch">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 292 142" class="toggle">
                         <path
                             d="M71 142C31.7878 142 0 110.212 0 71C0 31.7878 31.7878 0 71 0C110.212 0 119 30 146 30C173 30 182 0 221 0C260 0 292 31.7878 292 71C292 110.212 260.212 142 221 142C181.788 142 173 112 146 112C119 112 110.212 142 71 142Z"
@@ -179,16 +179,59 @@
             </div>
         </div>
         <script>
-            let slider = document.getElementById("range");
-            let value = document.querySelector(".value");
+            window.addEventListener("DOMContentLoaded", () => {
+                const slider = document.getElementById("range");
+                const value = document.querySelector(".value");
+                const toggle = document.getElementById("switch");
+                let lightStateValue = "0";
 
-            function calcValue() {
-                let valuePercentage = (slider.value / slider.max) * 100;
-                slider.style.background = `linear-gradient(to right, #1868e3 ${valuePercentage}%, #d3d3d3 ${valuePercentage}%)`;
-                value.innerHTML = `${slider.value}%`;
-            }
-            calcValue();
-            slider.addEventListener("input", calcValue);
+                function calcValue() {
+                    if (!slider) return;
+
+                    let valuePercentage = (slider.value / slider.max) * 100;
+                    slider.style.background = `linear-gradient(to right, #1868e3 ${valuePercentage}%, #d3d3d3 ${valuePercentage}%)`;
+                    value.innerHTML = `${slider.value}%`;
+                }
+
+                calcValue();
+
+                if (slider) {
+                    slider.addEventListener("input", calcValue);
+                }
+
+                if (toggle) {
+                    toggle.addEventListener("change", () => {
+                        if (toggle.checked) {
+                            lightStateValue = "1";
+                            sendData();
+                        } else {
+                            lightStateValue = "0";
+                            sendData();
+                        }
+                    });
+                }
+
+                if (slider) {
+                    slider.addEventListener("input", () => {
+                        sendData();
+                    });
+                }
+
+                const sendData = async () => {
+                    if (!slider || !toggle) return;
+
+                    const response = await fetch("http://172.20.10.2/", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            lightState: lightStateValue,
+                            brightness: slider.value
+                        })
+                    });
+
+                    return response;
+                };
+            });
         </script>
     </body>
 </html>
