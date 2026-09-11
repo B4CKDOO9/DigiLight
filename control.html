@@ -220,15 +220,16 @@
                 const sendData = async () => {
                     if (!slider || !toggle) return;
 
-                    const response = await fetch("http://172.20.10.2/", {
+                    const response = await fetch("http://172.20.10.2/light", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({
                             lightState: lightStateValue,
                             brightness: slider.value
-                        })
+                       })
                     });
 
+                    console.log("Light State:", lightStateValue, "Brightness:", slider.value); 
                     return response;
                 };
             });
